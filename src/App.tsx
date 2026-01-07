@@ -1,28 +1,16 @@
-import "./App.css";
-import { Button } from "./components/ui/Button";
-import { PlusIcon } from "./icons/PlusIcon";
-import { ShareIcon } from "./icons/ShareIcon";
+import { Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import { Signup } from "./pages/Singup";
+import { Signin } from "./pages/Signin";
 
-function App() {
+const App = () => {
   return (
-    <div className="flex gap-2 p-2">
-      <Button
-        varient="primary"
-        text="Share Brain"
-        size="lg"
-        onclick={() => alert("hello,working hai...")}
-        startIcon={<ShareIcon size="sm"/>}
-      />
-      <Button
-        varient="secondary"
-        text="Add Comment"
-        size="lg"
-        onclick={() => alert("hello,working hai...")}
-        startIcon={<PlusIcon size="sm"/>}
-
-      />
-    </div>
+    <Routes>
+      <Route path="/" element={<Dashboard />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/signin" element={<Signin />} />
+    </Routes>
   );
-}
+};
 
 export default App;
