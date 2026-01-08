@@ -2,7 +2,6 @@ import axios from "axios";
 import { DeleteIcon } from "../../icons/DeleteIcon";
 import { ShareIcon } from "../../icons/ShareIcon";
 import { BACKEND_URL } from "../../config/BackendUrl";
-import { useEffect, type Dispatch, type SetStateAction } from "react";
 import { YoutubeIcon } from "../../icons/YoutubeIcon";
 import { TwitterIcon } from "../../icons/TwitterIcon";
 
@@ -16,49 +15,87 @@ declare global {
   }
 }
 
+// interface CardProps {
+//   title: string;
+//   link: string;
+//   type: "twitter" | "youtube";
+//   cardId?: string;
+//   setContents?: Dispatch<SetStateAction<contentProps[]>>;
+// }
+// interface Content {
+//   _id: string;
+//   title: string;
+//   link: string;
+//   type: "youtube" | "twitter";
+// }
+// interface contentProps {
+//   _id: string;
+//   title: string;
+//   link: string;
+//   type: "youtube" | "twitter";
+//   setContents: React.Dispatch<React.SetStateAction<Content[]>>;
+// }
+
+// export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
+//   const handleDelete = async (contentId: string) => {
+//     try {
+//       const res = await axios.delete(`${BACKEND_URL}/content/${contentId}`, {
+//         headers: {
+//           Authorization: `Bearer ${localStorage.getItem("token")}`,
+//         },
+//       });
+//       if (res.data?.success) {
+//         // alert("Content deleted successfully");
+//         setContents?.((prevContents) =>
+//           prevContents.filter((content) => content._id !== contentId)
+//         );
+//       }
+//     } catch (err: unknown) {
+//       if (axios.isAxiosError(err) && err.response) {
+//         alert(`Failed to delete content: ${err.response.data.message}`);
+//         return;
+//       } else {
+//         alert("An unexpected error occurred");
+//       }
+//     }
+//   };
+//   useEffect(() => {
+//     if (type === "twitter" && window.twttr?.widgets?.load) {
+//       window.twttr.widgets.load();
+//     }
+//   }, [link, type]);
+
+import { useEffect, type Dispatch, type SetStateAction } from "react";
+import type { Content } from "../../types/Content";
+
 interface CardProps {
   title: string;
   link: string;
-  type: "twitter" | "youtube";
+  type: Content["type"];
   cardId?: string;
-  setContents?: Dispatch<SetStateAction<contentProps[]>>;
-}
-
-interface contentProps {
-  _id: string;
-  title: string;
-  link: string;
-  type: string;
+  setContents?: Dispatch<SetStateAction<Content[]>>;
 }
 
 export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
   const handleDelete = async (contentId: string) => {
-    try {
-      const res = await axios.delete(`${BACKEND_URL}/content/${contentId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-      if (res.data?.success) {
-        // alert("Content deleted successfully");
-        setContents?.((prevContents) =>
-          prevContents.filter((content) => content._id !== contentId)
-        );
-      }
-    } catch (err: unknown) {
-      if (axios.isAxiosError(err) && err.response) {
-        alert(`Failed to delete content: ${err.response.data.message}`);
-        return;
-      } else {
-        alert("An unexpected error occurred");
-      }
+    const res = await axios.delete(`${BACKEND_URL}/content/${contentId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    if (res.data?.success) {
+      setContents?.((prev) =>
+        prev.filter((content) => content._id !== contentId)
+      );
     }
   };
+
   useEffect(() => {
     if (type === "twitter" && window.twttr?.widgets?.load) {
       window.twttr.widgets.load();
     }
-  }, [link, type]);
+  }, [type, link]);
   // jab link/type change ho, reload widget
   return (
     <div>
