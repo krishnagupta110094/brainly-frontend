@@ -8,7 +8,7 @@ interface ButtonProps {
   text: string;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
-  onclick?: () => void;
+  onClick?: () => void;
   fullWidth?: boolean;
   loading?: boolean;
 }
@@ -36,7 +36,7 @@ export const Button = (props: ButtonProps) => {
         props.loading ? "opacity-60 cursor-not-allowed" : ""
       }`}
       disabled={props.loading}
-      onClick={props.onclick}
+      onClick={props.onClick}
     >
       <div className="flex items-center justify-center ">
         {props.startIcon ? <div className="pr-2">{props.startIcon}</div> : null}
