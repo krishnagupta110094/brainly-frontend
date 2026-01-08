@@ -12,7 +12,7 @@ export const useContents = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      console.log(response.data);
+      // console.log(response.data.contents);
       setContents(response.data.contents);
     } catch (error) {
       console.error("Error fetching contents:", error);
@@ -25,5 +25,5 @@ export const useContents = () => {
     }, 5000);
     return () => clearInterval(interval);
   }, []);
-  return {contents,refreshContents};
+  return { contents, refreshContents, setContents };
 };

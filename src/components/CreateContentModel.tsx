@@ -49,56 +49,65 @@ export const CreateContentModel = ({
   return (
     <>
       {open && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition duration-300" />
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40" />
       )}
-      <div>
-        {open && (
-          <div className="w-screen h-screen fixed top-0 left-0 flex justify-center z-50 ">
-            <div className="flex flex-col justify-center ">
-              <span className="bg-white opacity-100 p-4 rounded">
-                <div className="flex justify-end">
-                  <div onClick={onClose} className="cursor-pointer">
-                    <CrossIcon />
-                  </div>
-                </div>
-                <div>
-                  <Input placeholder={"Title"} ref={titleRef} />
-                  <Input placeholder={"Link"} ref={linkRef} />
-                  <div className="mt-2">
-                    <h1 className="font-semibold mb-2">Type</h1>
-                    <div className="flex gap-2 p-1 mb-2 justify-center">
-                      <Button
-                        text="Youtube"
-                        varient={
-                          type === ContentType.YOUTUBE ? "primary" : "secondary"
-                        }
-                        size="sm"
-                        onClick={() => setType(ContentType.YOUTUBE)}
-                      />
-                      <Button
-                        text="Twitter"
-                        varient={
-                          type === ContentType.TWITTER ? "primary" : "secondary"
-                        }
-                        size="sm"
-                        onClick={() => setType(ContentType.TWITTER)}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center">
-                  <Button
-                    varient="primary"
-                    text="Submit"
-                    size="md"
-                    onClick={AddContent}
-                  />
-                </div>
-              </span>
+
+      {open && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="w-[420px] rounded-3xl bg-[#0f172a] border border-white/10 shadow-2xl p-8 text-white">
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-2xl font-bold">Add Content</h2>
+              <div
+                onClick={onClose}
+                className="cursor-pointer text-slate-400 hover:text-white transition"
+              >
+                <CrossIcon />
+              </div>
+            </div>
+
+            {/* Inputs */}
+            <div className="space-y-4">
+              <Input placeholder="Title" ref={titleRef} />
+              <Input placeholder="Link" ref={linkRef} />
+            </div>
+
+            {/* Type Selector */}
+            <div className="mt-6">
+              <p className="text-sm text-slate-300 mb-2">Content Type</p>
+              <div className="flex gap-3">
+                <Button
+                  text="YouTube"
+                  varient={
+                    type === ContentType.YOUTUBE ? "primary" : "secondary"
+                  }
+                  size="sm"
+                  onClick={() => setType(ContentType.YOUTUBE)}
+                />
+                <Button
+                  text="Twitter"
+                  varient={
+                    type === ContentType.TWITTER ? "primary" : "secondary"
+                  }
+                  size="sm"
+                  onClick={() => setType(ContentType.TWITTER)}
+                />
+              </div>
+            </div>
+
+            {/* Action */}
+            <div className="mt-8">
+              <Button
+                varient="primary"
+                text="Add to Brain"
+                size="md"
+                fullWidth
+                onClick={AddContent}
+              />
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };
