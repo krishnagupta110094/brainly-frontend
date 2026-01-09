@@ -54,7 +54,7 @@ export const CreateContentModel = ({
 
       {open && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
-          <div className="w-[420px] rounded-3xl bg-[#0f172a] border border-white/10 shadow-2xl p-8 text-white">
+          <div className="w-[300px] mr-6 md:w-[420px] rounded-3xl bg-[#0f172a] border border-white/10 shadow-2xl p-8 text-white">
             {/* Header */}
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold">Add Content</h2>
