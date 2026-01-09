@@ -48,11 +48,11 @@ export function ShareBrain() {
         <div className="p-6">No contents shared.</div>
       ) : (
         <div className="p-6 min-h-screen bg-slate-100">
-          <h1 className="text-xl font-semibold mb-4">
-            Shared Brain by {username}
+          <h1 className="text-xl font-bold mb-4">
+            Shared Brain- {username.toUpperCase()}
           </h1>
 
-          <div className="flex gap-4 flex-wrap">
+          <div className="flex gap-5 flex-wrap mx-auto">
             {/* {contents.map((content) => (
           <Card
             key={content._id}

@@ -46,8 +46,8 @@ export const Signin = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#020617] text-white">
-      <div className="w-[420px] p-10 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
+    <div className="min-h-screen flex items-center justify-center p-8 bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#020617] text-white">
+      <div className="w-[420px] md:w-[560px] p-10 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl">
         <h2 className="text-3xl font-bold text-center mb-2">Welcome Back</h2>
 
         <p className="text-center text-slate-300 mb-8">

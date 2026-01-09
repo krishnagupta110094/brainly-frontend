@@ -1,10 +1,10 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 export function SidebarItem({
   text,
   icon,
 }: {
-  text: string;
+  text: ReactNode;
   icon: ReactElement;
 }) {
   return (

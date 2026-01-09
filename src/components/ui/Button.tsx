@@ -1,11 +1,11 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 
 type Varients = "primary" | "secondary";
 
 interface ButtonProps {
   varient: Varients;
   size: "sm" | "md" | "lg";
-  text: string;
+  text: ReactNode;
   startIcon?: ReactElement;
   endIcon?: ReactElement;
   onClick?: () => void;

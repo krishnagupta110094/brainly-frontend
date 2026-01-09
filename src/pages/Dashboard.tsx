@@ -27,9 +27,9 @@ export function Dashboard() {
         </div>
       )}
       {(contents && (
-        <div>
+        <div className="">
           <Sidebar />
-          <div className="ml-72 p-4 min-h-screen bg-slate-100">
+          <div className=" ml-15 md:ml-36 lg:ml-72  p-4 min-h-screen bg-slate-100">
             <CreateContentModel
               open={modalOpen}
               onClose={() => setModalOpen(false)}
@@ -38,7 +38,11 @@ export function Dashboard() {
               <Button
                 varient="primary"
                 size="sm"
-                text="Share Brain"
+                text={
+                  <>
+                    <span className="hidden lg:inline">Share Brain</span>
+                  </>
+                }
                 onClick={() => ToggleShare(true)}
                 startIcon={<ShareIcon size="sm" />}
               />
@@ -46,7 +50,11 @@ export function Dashboard() {
               <Button
                 varient="secondary"
                 size="sm"
-                text="Disable Share"
+                text={
+                  <>
+                    <span className="hidden lg:inline">Disable Share</span>
+                  </>
+                }
                 onClick={() => ToggleShare(false)}
                 startIcon={<DisableIcon size="sm" />}
               />
@@ -60,7 +68,7 @@ export function Dashboard() {
               />
               <ProfileMenu username={username} />
             </div>
-            <div className="flex gap-4 flex-wrap">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {contents.map(({ type, title, link, _id }) => {
                 return (
                   <Card
