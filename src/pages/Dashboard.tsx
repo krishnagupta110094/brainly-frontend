@@ -21,54 +21,49 @@ export function Dashboard() {
 
   return (
     <>
-      {!contents && (
-        <div className="ml-72 p-4 min-h-screen bg-slate-400">
-          No contents available
-        </div>
-      )}
-      {(contents && (
-        <div className="">
-          <Sidebar />
-          <div className=" ml-15 md:ml-36 lg:ml-72  p-4 min-h-screen bg-slate-100">
-            <CreateContentModel
-              open={modalOpen}
-              onClose={() => setModalOpen(false)}
+      <div className="">
+        <Sidebar />
+        <div className=" ml-15 md:ml-36 lg:ml-72  p-4 min-h-screen bg-slate-100">
+          <CreateContentModel
+            open={modalOpen}
+            onClose={() => setModalOpen(false)}
+          />
+          <div className="flex gap-2 justify-end mb-4">
+            <Button
+              varient="primary"
+              size="sm"
+              text={
+                <>
+                  <span className="hidden lg:inline">Share Brain</span>
+                </>
+              }
+              onClick={() => ToggleShare(true)}
+              startIcon={<ShareIcon size="sm" />}
             />
-            <div className="flex gap-2 justify-end mb-4">
-              <Button
-                varient="primary"
-                size="sm"
-                text={
-                  <>
-                    <span className="hidden lg:inline">Share Brain</span>
-                  </>
-                }
-                onClick={() => ToggleShare(true)}
-                startIcon={<ShareIcon size="sm" />}
-              />
 
-              <Button
-                varient="secondary"
-                size="sm"
-                text={
-                  <>
-                    <span className="hidden lg:inline">Disable Share</span>
-                  </>
-                }
-                onClick={() => ToggleShare(false)}
-                startIcon={<DisableIcon size="sm" />}
-              />
+            <Button
+              varient="secondary"
+              size="sm"
+              text={
+                <>
+                  <span className="hidden lg:inline">Disable Share</span>
+                </>
+              }
+              onClick={() => ToggleShare(false)}
+              startIcon={<DisableIcon size="sm" />}
+            />
 
-              <Button
-                varient="primary"
-                text="Add Content"
-                size="sm"
-                onClick={() => setModalOpen(true)}
-                startIcon={<PlusIcon size="sm" />}
-              />
-              <ProfileMenu username={username} />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Button
+              varient="primary"
+              text="Add Content"
+              size="sm"
+              onClick={() => setModalOpen(true)}
+              startIcon={<PlusIcon size="sm" />}
+            />
+            <ProfileMenu username={username} />
+          </div>
+          {contents && contents.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 [@media(min-width:1220px)]:grid-cols-3 gap-4">
               {contents.map(({ type, title, link, _id }) => {
                 return (
                   <Card
@@ -81,11 +76,29 @@ export function Dashboard() {
                 );
               })}
             </div>
-          </div>
+          ) : (
+            <div className="-mt-20 p-4 min-h-screen bg-slate-100 flex items-center justify-center">
+              <div className="bg-white rounded-xl shadow-md p-8 max-w-md text-center">
+                <div className="text-5xl mb-4">📭</div>
+                <h2 className="text-xl font-semibold text-slate-800 mb-2">
+                  No content yet
+                </h2>
+                <p className="text-slate-500 mb-6">
+                  Your digital brain is empty. Start by adding your first link
+                  or note.
+                </p>
+                <Button
+                  varient="primary"
+                  text="Add Content"
+                  size="lg"
+                  onClick={() => setModalOpen(true)}
+                  startIcon={<PlusIcon size="md" />}
+                />
+              </div>
+            </div>
+          )}
         </div>
-      )) || (
-        <div className="ml-72 p-4 min-h-screen bg-slate-100">Loading...</div>
-      )}
+      </div>
     </>
   );
 }
