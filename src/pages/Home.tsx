@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="min-h-screen  flex flex-col lg:flex-row bg-gradient-to-tr from-[#0f172a] via-[#1e293b] to-[#020617] text-white">
       {/* LEFT SECTION */}
-      <div className="flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-14">
+      <div className="flex-1 flex flex-col justify-center px-6 md:px-10 lg:px-14 mt-8">
         <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
           Build Your <span className="text-indigo-400">Digital Brain</span>
         </h1>
@@ -16,14 +16,14 @@ export default function Home() {
           Twitter, blogs, and links — all in one intelligent dashboard.
         </p>
 
-        <div className="mt-10 grid grid-cols-1 px-4 md:grid-cols-2  gap-10 mx-auto max-w-3xl">
-          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-56">
+        <div className="mt-10 grid grid-cols-1 px-4 [@media(min-width:700px)]:grid-cols-2 gap-10 mx-auto max-w-3xl">
+          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-72">
             <h3 className="text-xl font-semibold text-indigo-300">📌 Save</h3>
             <p className="text-sm text-slate-300 mt-2">
               Store videos, tweets and links instantly.
             </p>
           </div>
-          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-56">
+          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-72">
             <h3 className="text-xl font-semibold text-indigo-300">✨ Create</h3>
             <p className="text-sm text-slate-300 mt-2">
               Capture ideas, videos, tweets, and links in one place — instantly
@@ -31,7 +31,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-56">
+          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-72">
             <h3 className="text-xl font-semibold text-indigo-300">
               🧠 Organize
             </h3>
@@ -40,10 +40,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-56">
+          <div className="backdrop-blur-md bg-white/5 p-6 rounded-2xl w-72">
             <h3 className="text-xl font-semibold text-indigo-300">🚀 Share</h3>
             <p className="text-sm text-slate-300 mt-2">
-              Share your brain with a single link.
+              Share your brain with a single link and give anyone instant access
+              to your digital knowledge.
             </p>
           </div>
         </div>
