@@ -22,7 +22,7 @@ export function Dashboard() {
   return (
     <>
       {!contents && (
-        <div className="ml-72 p-4 min-h-screen bg-slate-100">
+        <div className="ml-72 p-4 min-h-screen bg-slate-400">
           No contents available
         </div>
       )}
