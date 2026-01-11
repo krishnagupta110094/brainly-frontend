@@ -15,58 +15,9 @@ declare global {
   }
 }
 
-// interface CardProps {
-//   title: string;
-//   link: string;
-//   type: "twitter" | "youtube";
-//   cardId?: string;
-//   setContents?: Dispatch<SetStateAction<contentProps[]>>;
-// }
-// interface Content {
-//   _id: string;
-//   title: string;
-//   link: string;
-//   type: "youtube" | "twitter";
-// }
-// interface contentProps {
-//   _id: string;
-//   title: string;
-//   link: string;
-//   type: "youtube" | "twitter";
-//   setContents: React.Dispatch<React.SetStateAction<Content[]>>;
-// }
-
-// export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
-//   const handleDelete = async (contentId: string) => {
-//     try {
-//       const res = await axios.delete(`${BACKEND_URL}/content/${contentId}`, {
-//         headers: {
-//           Authorization: `Bearer ${localStorage.getItem("token")}`,
-//         },
-//       });
-//       if (res.data?.success) {
-//         // alert("Content deleted successfully");
-//         setContents?.((prevContents) =>
-//           prevContents.filter((content) => content._id !== contentId)
-//         );
-//       }
-//     } catch (err: unknown) {
-//       if (axios.isAxiosError(err) && err.response) {
-//         alert(`Failed to delete content: ${err.response.data.message}`);
-//         return;
-//       } else {
-//         alert("An unexpected error occurred");
-//       }
-//     }
-//   };
-//   useEffect(() => {
-//     if (type === "twitter" && window.twttr?.widgets?.load) {
-//       window.twttr.widgets.load();
-//     }
-//   }, [link, type]);
-
 import { useEffect, type Dispatch, type SetStateAction } from "react";
 import type { Content } from "../../types/Content";
+import { OthersIcon } from "../../icons/OthersIcon";
 
 interface CardProps {
   title: string;
@@ -74,9 +25,17 @@ interface CardProps {
   type: Content["type"];
   cardId?: string;
   setContents?: Dispatch<SetStateAction<Content[]>>;
+  setAllContents?: Dispatch<SetStateAction<Content[]>>;
 }
 
-export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
+export const Card = ({
+  title,
+  link,
+  type,
+  cardId,
+  setContents,
+  setAllContents,
+}: CardProps) => {
   const handleDelete = async (contentId: string) => {
     const res = await axios.delete(`${BACKEND_URL}/content/${contentId}`, {
       headers: {
@@ -88,14 +47,19 @@ export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
       setContents?.((prev) =>
         prev.filter((content) => content._id !== contentId)
       );
+      setAllContents?.((prev) =>
+        prev.filter((content) => content._id !== contentId)
+      );
     }
   };
 
   useEffect(() => {
-    if (type === "twitter" && window.twttr?.widgets?.load) {
-      window.twttr.widgets.load();
+    if (type === "twitter") {
+      setTimeout(() => {
+        window.twttr?.widgets?.load();
+      }, 300);
     }
-  }, [type, link]);
+  }, []);
   // jab link/type change ho, reload widget
   return (
     <div>
@@ -105,6 +69,11 @@ export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
             <div className="pr-2 text-gray-500 ">
               {type === "youtube" && <YoutubeIcon />}
               {type === "twitter" && <TwitterIcon />}
+              {type !== "twitter" && type !== "youtube" && (
+                <span className="text-black">
+                  <OthersIcon />
+                </span>
+              )}
             </div>
             <div>{title}</div>
           </div>
@@ -139,6 +108,14 @@ export const Card = ({ title, link, type, cardId, setContents }: CardProps) => {
             <blockquote className="twitter-tweet">
               <a href={link.replace("x.com", "twitter.com")}></a>
             </blockquote>
+          )}
+
+          {type !== "youtube" && type !== "twitter" && (
+            <div>
+              <a href={link} target="_blank">
+                {link}
+              </a>
+            </div>
           )}
         </div>
       </div>

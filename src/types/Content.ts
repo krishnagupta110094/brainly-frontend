@@ -1,4 +1,4 @@
-export type ContentType = "youtube" | "twitter";
+export type ContentType = "youtube" | "twitter" | "others";
 
 export interface Content {
   _id: string;

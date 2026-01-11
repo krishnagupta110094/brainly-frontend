@@ -8,14 +8,17 @@ import { BACKEND_URL } from "../config/BackendUrl";
 enum ContentType {
   YOUTUBE = "youtube",
   TWITTER = "twitter",
+  OTHERS = "others",
 }
 
 export const CreateContentModel = ({
   open,
   onClose,
+  onSuccess,
 }: {
   open: boolean;
   onClose: () => void;
+  onSuccess: () => void;
 }) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const linkRef = useRef<HTMLInputElement>(null);
@@ -42,6 +45,7 @@ export const CreateContentModel = ({
     // ✅ Clear inputs
     if (titleRef.current) titleRef.current.value = "";
     if (linkRef.current) linkRef.current.value = "";
+    onSuccess();
 
     // ✅ Close modal on success
     onClose();
@@ -91,6 +95,14 @@ export const CreateContentModel = ({
                   }
                   size="sm"
                   onClick={() => setType(ContentType.TWITTER)}
+                />
+                <Button
+                  text="Others"
+                  varient={
+                    type === ContentType.OTHERS ? "primary" : "secondary"
+                  }
+                  size="sm"
+                  onClick={() => setType(ContentType.OTHERS)}
                 />
               </div>
             </div>

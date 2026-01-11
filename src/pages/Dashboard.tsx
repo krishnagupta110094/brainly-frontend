@@ -5,19 +5,20 @@ import { Card } from "../components/ui/Card";
 import { PlusIcon } from "../icons/PlusIcon";
 import { ShareIcon } from "../icons/ShareIcon";
 import { Sidebar } from "../components/Sidebar";
-import { useContents } from "../hooks/useContent";
 import ProfileMenu from "../components/ProfileMenu";
 import { ToggleShare } from "../components/ui/ToggleShare";
 import { DisableIcon } from "../icons/DisableIcon";
+import { useContents } from "../hooks/ContentContext";
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
-  const { contents, refreshContents, setContents } = useContents();
+  const { contents, refreshContents, setContents, setAllContents } =
+    useContents();
   const username = localStorage.getItem("username") || "User";
 
-  useEffect(() => {
-    refreshContents();
-  }, [modalOpen]);
+  // useEffect(() => {
+  //   refreshContents();
+  // }, [modalOpen]);
 
   return (
     <>
@@ -27,7 +28,12 @@ export function Dashboard() {
           <CreateContentModel
             open={modalOpen}
             onClose={() => setModalOpen(false)}
+            onSuccess={() => {
+              refreshContents();
+              setModalOpen(false);
+            }}
           />
+
           <div className="flex gap-2 justify-end mb-4">
             <Button
               varient="primary"
@@ -72,6 +78,8 @@ export function Dashboard() {
                     type={type}
                     cardId={_id}
                     setContents={setContents}
+                    key={_id}
+                    setAllContents={setAllContents}
                   />
                 );
               })}
