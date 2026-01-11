@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CreateContentModel } from "../components/CreateContentModel";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
@@ -15,10 +15,6 @@ export function Dashboard() {
   const { contents, refreshContents, setContents, setAllContents } =
     useContents();
   const username = localStorage.getItem("username") || "User";
-
-  // useEffect(() => {
-  //   refreshContents();
-  // }, [modalOpen]);
 
   return (
     <>
