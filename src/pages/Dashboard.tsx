@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreateContentModel } from "../components/CreateContentModel";
 import { Button } from "../components/ui/Button";
 import { Card } from "../components/ui/Card";
@@ -8,13 +8,17 @@ import { Sidebar } from "../components/Sidebar";
 import ProfileMenu from "../components/ProfileMenu";
 import { ToggleShare } from "../components/ui/ToggleShare";
 import { DisableIcon } from "../icons/DisableIcon";
-import { useContents } from "../hooks/ContentContext";
+import { useContents } from "../hooks/useContents";
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
   const { contents, refreshContents, setContents, setAllContents } =
     useContents();
   const username = localStorage.getItem("username") || "User";
+
+  useEffect(() => {
+    refreshContents();
+  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { useContents } from "../hooks/ContentContext";
+import { useContents } from "../hooks/useContents";
 import { AllIcons } from "../icons/AllIcons";
 import { LogoIcon } from "../icons/Logo";
 import { OthersIcon } from "../icons/OthersIcon";
